@@ -67,7 +67,7 @@ function Contents() {
 				if (_this.showPageNumbers) {
 					html += '<span class="badge">p.' + pageNumber + '</span>';
 				}
-				html += '<a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + page.title.replace(/ /g, "-").replace(/"/g, "-").replace(/,/g, "-").replace(/'/g, "-") + '-'+bookletId+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';
+				html += '<a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + LZString.compress(page.title) + '-'+bookletId+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';
 				pageNumber++
 			});
 			html += '</ul></div></div>';
@@ -83,7 +83,7 @@ function Page(title, bodyHtml) {
 	this.generate = generate;
 	function generate(bookletId, panelClasses) {
 		var html = "";
-		html += '<div id="' + this.title.replace(/ /g, "-").replace(/"/g, "-").replace(/,/g, "-").replace(/'/g, "-") + '-'+bookletId+'" class="panel booklet-page-'+bookletId+' ' + panelClasses + '"><div class="panel-heading">' + this.title + '</div>';
+		html += '<div id="' + LZString.compress(this.title) + '-'+bookletId+'" class="panel booklet-page-'+bookletId+' ' + panelClasses + '"><div class="panel-heading">' + this.title + '</div>';
         html += '<div class="panel-body">'+this.bodyHtml+'</div></div>';
 		return html;
 	}
@@ -102,10 +102,10 @@ function Pagination() {
 		pages.forEach(function (page){
 			if(!contentsEnabled){
 				pageNumber = 2;
-				html+= '<li class="booklet-pagination-item-'+bookletId+' active" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + page.title.replace(/ /g, "-").replace(/"/g, "-").replace(/,/g, "-").replace(/'/g, "-") + '-'+bookletId+'" data=page="' + pageNumber + '">' + page.title + '</a></li>';				
+				html+= '<li class="booklet-pagination-item-'+bookletId+' active" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + LZString.compress(page.title) + '-'+bookletId+'" data=page="' + pageNumber + '">' + page.title + '</a></li>';				
 			} else {
 				pageNumber++;
-				html+= '<li class="booklet-pagination-item-'+bookletId+'" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + page.title.replace(/ /g, "-").replace(/"/g, "-").replace(/,/g, "-").replace(/'/g, "-") + '-'+bookletId+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';				
+				html+= '<li class="booklet-pagination-item-'+bookletId+'" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + LZString.compress(page.title) + '-'+bookletId+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';				
 			}
 		});                      
 		html += '</ul></div>';
