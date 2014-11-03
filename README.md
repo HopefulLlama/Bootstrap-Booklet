@@ -9,7 +9,6 @@ Installation
 1. Ensure you have the following dependencies downloaded and imported into the HTML file: <br />
   a. jQuery <br />
   b. Bootstrap <br />
-  c. LZ-String <br />
 If not, please download the latest tested version from <a href="https://github.com/HopefulLlama/Bootstrap-Booklet/tree/master/lib">Bootstrap-Booklet/lib</a>.
 2. Download the minified version from <a href="https://raw.githubusercontent.com/HopefulLlama/Bootstrap-Booklet/master/bin/bootstrap-booklet-0.1.min.js">here</a>.
 3. Import all files into the relevant HTML page.
