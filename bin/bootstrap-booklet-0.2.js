@@ -9,9 +9,12 @@ function BootstrapBooklet(container) {
 	this.pages = [];
 	this.pagination = new Pagination();
 	this.panelClasses = "panel-info";
+
+	this.pageCounter = 0;
 	this.addPage = addPage;
 	function addPage(title, bodyHtml) {
-		this.pages.push(new Page(title, bodyHtml));
+		this.pages.push(new Page(this.pageCounter, title, bodyHtml));
+		this.pageCounter++;
 	}
 
 	this.setPages = setPages;
@@ -67,8 +70,8 @@ function Contents() {
 				if (_this.showPageNumbers) {
 					html += '<span class="badge">p.' + pageNumber + '</span>';
 				}
-				html += '<a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + LZString.compress(page.title) + '-'+bookletId+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';
-				pageNumber++
+				html += '<a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + bookletId+'-'+page.id + '" data-page="' + pageNumber + '">' + page.title + '</a></li>';
+				pageNumber++;
 			});
 			html += '</ul></div></div>';
 		}
@@ -76,14 +79,15 @@ function Contents() {
 	}
 }
 
-function Page(title, bodyHtml) {
+function Page(id, title, bodyHtml) {
+	this.id = id;
 	this.title = title;
 	this.bodyHtml = bodyHtml;
 
 	this.generate = generate;
 	function generate(bookletId, panelClasses) {
 		var html = "";
-		html += '<div id="' + LZString.compress(this.title) + '-'+bookletId+'" class="panel booklet-page-'+bookletId+' ' + panelClasses + '"><div class="panel-heading">' + this.title + '</div>';
+		html += '<div id="' + bookletId+'-'+this.id +'" class="panel booklet-page-'+bookletId+' ' + panelClasses + '"><div class="panel-heading">' + this.title + '</div>';
         html += '<div class="panel-body">'+this.bodyHtml+'</div></div>';
 		return html;
 	}
@@ -102,10 +106,10 @@ function Pagination() {
 		pages.forEach(function (page){
 			if(!contentsEnabled){
 				pageNumber = 2;
-				html+= '<li class="booklet-pagination-item-'+bookletId+' active" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + LZString.compress(page.title) + '-'+bookletId+'" data=page="' + pageNumber + '">' + page.title + '</a></li>';				
+				html+= '<li class="booklet-pagination-item-'+bookletId+' active" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + bookletId+'-'+page.id +'" data=page="' + pageNumber + '">' + page.title + '</a></li>';				
 			} else {
 				pageNumber++;
-				html+= '<li class="booklet-pagination-item-'+bookletId+'" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + LZString.compress(page.title) + '-'+bookletId+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';				
+				html+= '<li class="booklet-pagination-item-'+bookletId+'" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + bookletId+'-'+page.id+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';				
 			}
 		});                      
 		html += '</ul></div>';
