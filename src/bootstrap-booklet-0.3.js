@@ -36,7 +36,11 @@ function BootstrapBooklet(container) {
 
 		$(".booklet-pagination-div-"+_this.id).css("text-align", "center");
 		$(".booklet-page-"+_this.id).css("display", "none");
-		$(".booklet-contents-"+_this.id).css("display", "block");
+		if( _this.contents.enabled) {
+			$(".booklet-contents-"+_this.id).css("display", "block");
+		} else {
+			$("#"+_this.id + "-0").css("display", "block");
+		}
 
 		$(".booklet-button-"+_this.id).click(function (event){
 		if($($(event.target).attr("data-target")).css("display") !== "block") {
@@ -104,11 +108,10 @@ function Pagination() {
 		}
 
 		pages.forEach(function (page){
-			if(!contentsEnabled){
-				pageNumber = 2;
-				html+= '<li class="booklet-pagination-item-'+bookletId+' active" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + bookletId+'-'+page.id +'" data=page="' + pageNumber + '">' + page.title + '</a></li>';				
+			pageNumber++;
+			if(!contentsEnabled && pageNumber === 2){
+				html+= '<li class="booklet-pagination-item-'+bookletId+' active" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + bookletId+'-'+page.id +'" data-page="' + pageNumber + '">' + page.title + '</a></li>';				
 			} else {
-				pageNumber++;
 				html+= '<li class="booklet-pagination-item-'+bookletId+'" data-page="' + pageNumber + '"><a class="booklet-button-'+bookletId+'" href="javascript:void(0)" data-target="#' + bookletId+'-'+page.id+'" data-page="' + pageNumber + '">' + page.title + '</a></li>';				
 			}
 		});                      
