@@ -16,12 +16,6 @@ function BootstrapBooklet(container) {
 		this.pages.push(new Page(this.pageCounter, title, bodyHtml));
 		this.pageCounter++;
 	}
-
-	this.setPages = setPages;
-	function setPages(pages) {
-		this.pages = pages;
-	}
-
 	this.generate = generate;
 	function generate() {
 		var _this = this;
