@@ -37,18 +37,18 @@ function BootstrapBooklet(container) {
 		}
 
 		$(".booklet-button-"+_this.id).click(function (event){
-		if($($(event.target).attr("data-target")).css("display") !== "block") {
-			$(".booklet-page-"+_this.id).slideUp();
-			$($(event.target).attr("data-target")).slideDown();
+			if($($(event.target).attr("data-target")).css("display") !== "block") {
+				$(".booklet-page-"+_this.id).slideUp();
+				$($(event.target).attr("data-target")).slideDown();
 
-			$(".booklet-pagination-item-"+_this.id).removeClass("active");
-			$(".booklet-pagination-item-"+_this.id).each(function (index) {
-				if ($(this).attr("data-page") === $(event.target).attr("data-page")) {
-					$(this).addClass("active");		
-				}
-			});
-		}
-	});
+				$(".booklet-pagination-item-"+_this.id).removeClass("active");
+				$(".booklet-pagination-item-"+_this.id).each(function (index) {
+					if ($(this).attr("data-page") === $(event.target).attr("data-page")) {
+						$(this).addClass("active");		
+					}
+				});
+			}
+		});
 	}
 }
 
@@ -86,7 +86,7 @@ function Page(id, title, bodyHtml) {
 	function generate(bookletId, panelClasses) {
 		var html = "";
 		html += '<div id="' + bookletId+'-'+this.id +'" class="panel booklet-page-'+bookletId+' ' + panelClasses + '"><div class="panel-heading">' + this.title + '</div>';
-        html += '<div class="panel-body">'+this.bodyHtml+'</div></div>';
+		html += '<div class="panel-body">'+this.bodyHtml+'</div></div>';
 		return html;
 	}
 }
