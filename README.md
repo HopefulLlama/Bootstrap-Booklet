@@ -3,6 +3,8 @@ Bootstrap-Booklet
 
 A simple library designed to ease the creation of a multiple page booklet, using a content page and pagination to manage navigation. 
 
+Please view the Wiki for in-depth technical documentation. Alternatively, continue reading on for quick setup and start information.
+
 Installation
 ------------
 
